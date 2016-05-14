@@ -1,4 +1,6 @@
-package com.rajohns.kaproject;
+package com.rajohns.kaproject.retrofit;
+
+import com.rajohns.kaproject.models.Badge;
 
 import java.util.List;
 

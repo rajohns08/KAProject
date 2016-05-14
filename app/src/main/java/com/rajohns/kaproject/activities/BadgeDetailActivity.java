@@ -1,10 +1,12 @@
-package com.rajohns.kaproject;
+package com.rajohns.kaproject.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.rajohns.kaproject.constants.IntentKey;
+import com.rajohns.kaproject.R;
 import com.squareup.picasso.Picasso;
 
 public class BadgeDetailActivity extends AppCompatActivity {

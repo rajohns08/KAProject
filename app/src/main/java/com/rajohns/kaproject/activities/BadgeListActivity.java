@@ -1,10 +1,17 @@
-package com.rajohns.kaproject;
+package com.rajohns.kaproject.activities;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.widget.Toast;
+
+import com.rajohns.kaproject.R;
+import com.rajohns.kaproject.adapters.BadgeListAdapter;
+import com.rajohns.kaproject.constants.BadgeCategory;
+import com.rajohns.kaproject.models.Badge;
+import com.rajohns.kaproject.retrofit.RestManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +23,8 @@ import retrofit2.Response;
 public class BadgeListActivity extends AppCompatActivity {
 
     // TODO: SHARED ELEMENT TRANSITION TO DETAIL WITH MAYBE CIRCULAR REVEAL
-    // TODO: DIFFERENT PROPERTY NAMES FOR GSON OBJECT ELEMENTS FROM JSON KEY NAMES
     // TODO: ATTRIBUTE 3RD PARTY LIBS
-    // TODO: FAILURE AND LOADING STATES
     // TODO: GRAY CIRCLE BEFORE IMAGES LOAD
-    // TODO: GROUP FILES IN FOLDERS
 
     private List<Badge> badges = new ArrayList<>();
 
@@ -37,23 +41,30 @@ public class BadgeListActivity extends AppCompatActivity {
         final BadgeListAdapter adapter = new BadgeListAdapter(this.getApplicationContext(), badges);
         recyclerView.setAdapter(adapter);
 
+        final ProgressDialog progressDialog = ProgressDialog.show(this, "", "Loading Badges");
         Call<List<Badge>> call = RestManager.getInstance().getAllBadges();
         call.enqueue(new Callback<List<Badge>>() {
             @Override
             public void onResponse(Call<List<Badge>> call, Response<List<Badge>> response) {
+                progressDialog.dismiss();
                 badges.clear();
-                for (Badge badge : response.body()) {
-                    if (badge.badge_category == 5) {
-                        badges.add(badge);
+                if (response.body() != null) {
+                    for (Badge badge : response.body()) {
+                        if (badge.badge_category == BadgeCategory.CHALLENGE_PATCHES) {
+                            badges.add(badge);
+                        }
                     }
+                    adapter.setBadges(badges);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(BadgeListActivity.this, "Error loading badges.", Toast.LENGTH_LONG).show();
                 }
-                adapter.setBadges(badges);
-                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<List<Badge>> call, Throwable t) {
-                Log.d("tagzzz", "failure loading stuff");
+                progressDialog.dismiss();
+                Toast.makeText(BadgeListActivity.this, "Error loading badges.", Toast.LENGTH_LONG).show();
             }
         });
     }

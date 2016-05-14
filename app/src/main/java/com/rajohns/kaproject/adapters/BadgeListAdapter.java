@@ -1,4 +1,4 @@
-package com.rajohns.kaproject;
+package com.rajohns.kaproject.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.rajohns.kaproject.constants.IntentKey;
+import com.rajohns.kaproject.R;
+import com.rajohns.kaproject.activities.BadgeDetailActivity;
+import com.rajohns.kaproject.models.Badge;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -25,6 +29,10 @@ public class BadgeListAdapter extends RecyclerView.Adapter<BadgeListAdapter.View
 
         public ViewHolder(final View cardView) {
             super(cardView);
+
+            badgeNameTextView = (TextView)cardView.findViewById(R.id.badge_name_text_view);
+            badgeIconImageView = (ImageView)cardView.findViewById(R.id.badge_icon_image_view);
+
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -35,8 +43,6 @@ public class BadgeListAdapter extends RecyclerView.Adapter<BadgeListAdapter.View
                     cardView.getContext().startActivity(intent);
                 }
             });
-            badgeNameTextView = (TextView)cardView.findViewById(R.id.badge_name_text_view);
-            badgeIconImageView = (ImageView)cardView.findViewById(R.id.badge_icon_image_view);
         }
 
         public void bindBadge(Badge badge) {

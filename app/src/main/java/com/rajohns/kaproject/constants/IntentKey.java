@@ -1,4 +1,4 @@
-package com.rajohns.kaproject;
+package com.rajohns.kaproject.constants;
 
 public class IntentKey {
 
