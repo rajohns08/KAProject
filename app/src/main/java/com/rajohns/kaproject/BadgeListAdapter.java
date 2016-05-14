@@ -44,9 +44,13 @@ public class BadgeListAdapter extends RecyclerView.Adapter<BadgeListAdapter.View
         }
     }
 
-    public BadgeListAdapter(Context context, List<Badge> dataset) {
+    public BadgeListAdapter(Context context, List<Badge> badges) {
         this.context = context;
-        badges = dataset;
+        this.badges = badges;
+    }
+
+    public void setBadges(List<Badge> badges) {
+        this.badges = badges;
     }
 
     @Override
