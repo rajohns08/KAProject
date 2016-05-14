@@ -70,7 +70,10 @@ public class BadgeListAdapter extends RecyclerView.Adapter<BadgeListAdapter.View
         Badge badge = badges.get(position);
         holder.bindBadge(badge);
         holder.badgeNameTextView.setText(badge.description);
-        Picasso.with(context).load(badge.icons.large).into(holder.badgeIconImageView);
+        Picasso.with(context)
+            .load(badge.icons.large)
+            .placeholder(R.drawable.badge_icon_placeholder)
+            .into(holder.badgeIconImageView);
     }
 
     @Override
