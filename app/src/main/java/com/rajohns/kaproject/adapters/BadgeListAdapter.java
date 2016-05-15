@@ -1,7 +1,10 @@
 package com.rajohns.kaproject.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rajohns.kaproject.constants.IntentKey;
 import com.rajohns.kaproject.R;
 import com.rajohns.kaproject.activities.BadgeDetailActivity;
+import com.rajohns.kaproject.constants.IntentKey;
 import com.rajohns.kaproject.models.Badge;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +43,9 @@ public class BadgeListAdapter extends RecyclerView.Adapter<BadgeListAdapter.View
                     intent.putExtra(IntentKey.BADGE_NAME, badge.description);
                     intent.putExtra(IntentKey.BADGE_DESCRIPTION, badge.safe_extended_description);
                     intent.putExtra(IntentKey.BADGE_ICON_URL, badge.icons.large);
-                    cardView.getContext().startActivity(intent);
+                    Pair<View, String> badgeIconPair = Pair.create((View)badgeIconImageView, "badge_icon");
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity)cardView.getContext(), badgeIconPair);
+                    cardView.getContext().startActivity(intent, options.toBundle());
                 }
             });
         }

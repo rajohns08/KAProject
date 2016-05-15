@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rajohns.kaproject.constants.IntentKey;
 import com.rajohns.kaproject.R;
+import com.rajohns.kaproject.constants.IntentKey;
 import com.squareup.picasso.Picasso;
 
 public class BadgeDetailActivity extends AppCompatActivity {
@@ -33,7 +33,6 @@ public class BadgeDetailActivity extends AppCompatActivity {
 
         badgeNameTextView.setText(badgeName);
         badgeDescriptionTextView.setText(badgeDescription);
-
         Picasso.with(this).load(badgeIconUrl).into(badgeIconImageView);
     }
 

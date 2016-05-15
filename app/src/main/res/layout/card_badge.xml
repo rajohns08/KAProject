@@ -22,17 +22,19 @@
 
         <ImageView
             android:id="@+id/badge_icon_image_view"
+            android:transitionName="badge_icon"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:padding="15dp"
-            />
+            tools:targetApi="lollipop"
+            android:contentDescription="@string/badge_icon"/>
 
         <TextView
             android:id="@+id/badge_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="15dp"
-            tools:text="testijfdkla;f djakflda ;fjdaklf da;fjdaklf; dajsfkal;f jdaklf ;dasfjdkasl;f djaklf;d afjkdla;f f jdkalf; dajkfldas; ngfffffffffffffff"/>
+            tools:text="Hour of Databases"/>
 
     </LinearLayout>
 

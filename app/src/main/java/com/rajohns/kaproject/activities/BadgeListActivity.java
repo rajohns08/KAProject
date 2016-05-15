@@ -22,9 +22,8 @@ import retrofit2.Response;
 
 public class BadgeListActivity extends AppCompatActivity {
 
-    // TODO: SHARED ELEMENT TRANSITION TO DETAIL WITH MAYBE CIRCULAR REVEAL
     // TODO: ATTRIBUTE 3RD PARTY LIBS
-    // TODO: GRAY CIRCLE BEFORE IMAGES LOAD
+    // TODO: WRAP DETAIL ACTIVITY IN SCROLLVIEW
 
     private List<Badge> badges = new ArrayList<>();
 

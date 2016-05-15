@@ -9,10 +9,12 @@
 
     <ImageView
         android:id="@+id/badge_icon_image_view"
+        android:transitionName="badge_icon"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="40dp"
-        android:contentDescription="@string/badge_icon"/>
+        android:contentDescription="@string/badge_icon"
+        tools:targetApi="lollipop"/>
 
     <TextView
         android:id="@+id/badge_name_text_view"
