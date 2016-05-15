@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal">
-
-    <ImageView
-        android:id="@+id/badge_icon_image_view"
-        android:transitionName="badge_icon"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="40dp"
-        android:contentDescription="@string/badge_icon"
-        tools:targetApi="lollipop"/>
-
-    <TextView
-        android:id="@+id/badge_name_text_view"
-        android:layout_width="250dp"
+    android:layout_width="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        tools:text="Hour of Drawing with Code Blocks"
-        android:textSize="24sp"/>
+        android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/badge_description_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        tools:text="Complete the Hour of Drawing with Blocks for Hour of Code!"
-        android:paddingLeft="20sp"
-        android:paddingRight="20sp"/>
+        <ImageView
+            android:id="@+id/badge_icon_image_view"
+            android:transitionName="badge_icon"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="40dp"
+            android:contentDescription="@string/badge_icon"
+            tools:targetApi="lollipop"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/badge_name_text_view"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            tools:text="Hour of Drawing with Code Blocks"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/badge_description_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            tools:text="Complete the Hour of Drawing with Blocks for Hour of Code!"
+            android:paddingLeft="20sp"
+            android:paddingRight="20sp"/>
+
+    </LinearLayout>
+
+</ScrollView>

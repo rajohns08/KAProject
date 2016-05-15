@@ -23,7 +23,7 @@ import retrofit2.Response;
 public class BadgeListActivity extends AppCompatActivity {
 
     // TODO: ATTRIBUTE 3RD PARTY LIBS
-    // TODO: WRAP DETAIL ACTIVITY IN SCROLLVIEW
+    // TODO: CLEAN UP STRINGS
 
     private List<Badge> badges = new ArrayList<>();
 
@@ -31,6 +31,7 @@ public class BadgeListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_badge_list);
+
 
         final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -40,32 +41,44 @@ public class BadgeListActivity extends AppCompatActivity {
         final BadgeListAdapter adapter = new BadgeListAdapter(this.getApplicationContext(), badges);
         recyclerView.setAdapter(adapter);
 
-        final ProgressDialog progressDialog = ProgressDialog.show(this, "", "Loading Badges");
-        Call<List<Badge>> call = RestManager.getInstance().getAllBadges();
-        call.enqueue(new Callback<List<Badge>>() {
-            @Override
-            public void onResponse(Call<List<Badge>> call, Response<List<Badge>> response) {
-                progressDialog.dismiss();
-                badges.clear();
-                if (response.body() != null) {
-                    for (Badge badge : response.body()) {
-                        if (badge.badge_category == BadgeCategory.CHALLENGE_PATCHES) {
-                            badges.add(badge);
+        Object data = getLastCustomNonConfigurationInstance();
+        if (data != null) {
+            badges = (List<Badge>)data;
+            adapter.setBadges(badges);
+            adapter.notifyDataSetChanged();
+        } else {
+            final ProgressDialog progressDialog = ProgressDialog.show(this, "", "Loading Badges");
+            Call<List<Badge>> call = RestManager.getInstance().getAllBadges();
+            call.enqueue(new Callback<List<Badge>>() {
+                @Override
+                public void onResponse(Call<List<Badge>> call, Response<List<Badge>> response) {
+                    progressDialog.dismiss();
+                    badges.clear();
+                    if (response.body() != null) {
+                        for (Badge badge : response.body()) {
+                            if (badge.badge_category == BadgeCategory.CHALLENGE_PATCHES) {
+                                badges.add(badge);
+                            }
                         }
+                        adapter.setBadges(badges);
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(BadgeListActivity.this, "Error loading badges.", Toast.LENGTH_LONG).show();
                     }
-                    adapter.setBadges(badges);
-                    adapter.notifyDataSetChanged();
-                } else {
+                }
+
+                @Override
+                public void onFailure(Call<List<Badge>> call, Throwable t) {
+                    progressDialog.dismiss();
                     Toast.makeText(BadgeListActivity.this, "Error loading badges.", Toast.LENGTH_LONG).show();
                 }
-            }
+            });
+        }
+    }
 
-            @Override
-            public void onFailure(Call<List<Badge>> call, Throwable t) {
-                progressDialog.dismiss();
-                Toast.makeText(BadgeListActivity.this, "Error loading badges.", Toast.LENGTH_LONG).show();
-            }
-        });
+    @Override
+    public Object onRetainCustomNonConfigurationInstance() {
+        return badges;
     }
 
 }
