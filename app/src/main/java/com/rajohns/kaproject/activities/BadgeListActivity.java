@@ -32,7 +32,6 @@ public class BadgeListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_badge_list);
 
-
         final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -47,7 +46,7 @@ public class BadgeListActivity extends AppCompatActivity {
             adapter.setBadges(badges);
             adapter.notifyDataSetChanged();
         } else {
-            final ProgressDialog progressDialog = ProgressDialog.show(this, "", "Loading Badges");
+            final ProgressDialog progressDialog = ProgressDialog.show(this, "", getString(R.string.loading_badges));
             Call<List<Badge>> call = RestManager.getInstance().getAllBadges();
             call.enqueue(new Callback<List<Badge>>() {
                 @Override
@@ -63,14 +62,14 @@ public class BadgeListActivity extends AppCompatActivity {
                         adapter.setBadges(badges);
                         adapter.notifyDataSetChanged();
                     } else {
-                        Toast.makeText(BadgeListActivity.this, "Error loading badges.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(BadgeListActivity.this, getString(R.string.error_loading_badges), Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<List<Badge>> call, Throwable t) {
                     progressDialog.dismiss();
-                    Toast.makeText(BadgeListActivity.this, "Error loading badges.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(BadgeListActivity.this, getString(R.string.error_loading_badges), Toast.LENGTH_LONG).show();
                 }
             });
         }
