@@ -22,9 +22,6 @@ import retrofit2.Response;
 
 public class BadgeListActivity extends AppCompatActivity {
 
-    // TODO: ATTRIBUTE 3RD PARTY LIBS
-    // TODO: CLEAN UP STRINGS
-
     private List<Badge> badges = new ArrayList<>();
 
     @Override
